@@ -1,16 +1,16 @@
 
 public interface CadastroConsulta {
 	
-	public void cadastraPessoa(String nome, String sobrenome);
+	public void cadastraPessoa(String nome, String sobrenome, SalaDeEvento sala, EspacoDeCafe cafe);
 	
-	public void cadastraSala(int lotacao, String nome);
+	public void cadastraSala(String nome);
 	
 	public void cadastraEspaco(String nome);
 	
 	public void consultaPessoa(String nome);
 	
-	public SalaDeEvento consultaSala();
+	public void consultaSala(String nome);
 	
-	public EspacoDeCafe consultaEspaco();
+	public void consultaEspaco(String nome);
 	
 }

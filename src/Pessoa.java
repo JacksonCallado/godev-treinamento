@@ -15,6 +15,13 @@ public class Pessoa {
 		this.sobrenome = sobrenome;
 	}
 	
+	public Pessoa(String nome, String sobrenome, SalaDeEvento sala, EspacoDeCafe cafe) {
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.setSala(sala);
+		this.setCafe(cafe);
+	}
+	
 	public void mostraPessoa() {
 		System.out.println(this.nome);
 		System.out.println(this.sobrenome);

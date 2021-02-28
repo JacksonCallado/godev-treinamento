@@ -2,9 +2,9 @@ import java.util.ArrayList;
 
 public class Controle implements CadastroConsulta{
 	
-	private ArrayList<Pessoa> alunos;
-	private ArrayList<SalaDeEvento> salas;
-	private ArrayList<EspacoDeCafe> espacos;
+	ArrayList<Pessoa> alunos;
+	ArrayList<SalaDeEvento> salas;
+	ArrayList<EspacoDeCafe> espacos;
 	
 	public Controle() {
 		alunos = new ArrayList<Pessoa>();
@@ -13,14 +13,14 @@ public class Controle implements CadastroConsulta{
 	}
 	
 	@Override
-	public void cadastraPessoa(String nome, String sobrenome) {
-		Pessoa pessoa = new Pessoa(nome, sobrenome);
+	public void cadastraPessoa(String nome, String sobrenome, SalaDeEvento sala, EspacoDeCafe cafe) {
+		Pessoa pessoa = new Pessoa(nome, sobrenome, sala, cafe);
 		alunos.add(pessoa);		
 	}
 
 	@Override
-	public void cadastraSala(int lotacao, String nome) {
-		SalaDeEvento sala = new SalaDeEvento(lotacao, nome);
+	public void cadastraSala(String nome) {
+		SalaDeEvento sala = new SalaDeEvento(nome);
 		salas.add(sala);
 	}
 
@@ -29,6 +29,24 @@ public class Controle implements CadastroConsulta{
 		EspacoDeCafe cafe = new EspacoDeCafe(nome);
 		espacos.add(cafe);
 	}
+	
+	public void dividiAlunos() {
+		int lotacao = alunos.size();
+		if(salas.size() == 2) {
+			
+			int metade = lotacao / 2;
+			for (int i = 0; i <= metade; i++) {
+				SalaDeEvento sala = salas.get(1);
+				sala.addAlunos(alunos.get(i));
+				//System.out.println(i);
+			}
+			for(int i = (metade + 1); i < lotacao; i++) {
+				SalaDeEvento sala = salas.get(2);
+				sala.addAlunos(alunos.get(i));
+				//System.out.println(i);
+			}
+		}
+	}
 
 	@Override
 	public void consultaPessoa(String nome) {		
@@ -36,20 +54,22 @@ public class Controle implements CadastroConsulta{
 			Pessoa pessoa = alunos.get(indice);
 			if(pessoa.getNome() == nome) {
 				pessoa.mostraPessoa();
-			}else if(pessoa.getNome() != null) {
-				System.out.println("Pessoa não encontrada!");
 			}
 		}		
 	}
 
 	@Override
-	public SalaDeEvento consultaSala() {
-		// TODO Auto-generated method stub
-		return null;
+	public void consultaSala(String nome) {		
+		for(int indice = 0; indice < alunos.size(); indice++) {
+			SalaDeEvento sala = salas.get(indice);
+			if(sala.getNome() == nome) {
+				sala.mostraSala();
+			}
+		}		
 	}
 
 	@Override
-	public EspacoDeCafe consultaEspaco() {
+	public void consultaEspaco(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
